@@ -1,0 +1,297 @@
+<?php
+$servername1 = "192.168.1.79";
+$servername2 = "192.168.1.82";
+$username = "adminuser";
+$password = "Password";
+$database = "testing";
+
+
+echo <<<HTML
+<html>
+<body style='font-family: Calibri, "Segeo UI", Arial, sans-serif;'>
+HTML;
+
+try {
+	$conn = new PDO("mysql:host=$servername1;dbname=$database", $username, $password);
+	$conn->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	echo "Connected successfully to 192.168.0.102";
+	echo "<br>";
+	echo "SHOW SLAVE STATUS";
+	$result = $conn->query('SHOW SLAVE STATUS');
+	$colcount = $result->columnCount();
+
+	echo "<pre style='display:inline;'>";
+	// Get coluumn headers
+	echo("<table style='border: solid 1px black;'><tr>");
+    echo ('<table><tr>');
+        for ($i = 0; $i < $colcount; $i++){
+            $meta = $result->getColumnMeta($i)["name"];
+            echo('<th>' . $meta . '</th>');
+        }
+        echo('</tr>');
+
+    	// Get row data
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            echo('<tr>');
+            for ($i = 0; $i < $colcount; $i++){
+                $meta = $result->getColumnMeta($i)["name"];
+                echo("<td style='border: solid 1px black;'>" . $row[$meta] . '</td>');
+            }
+            echo('</tr>');
+        }
+
+        echo ('</table>');
+}
+catch(PDOException $e)
+	{
+	echo "Connection failed: " . $e->getMessage();
+	}
+echo "<br>";
+try {
+        $conn = new PDO("mysql:host=$servername1;dbname=$database", $username, $password);
+        $conn->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "<br>";
+	echo "SHOW PROCESSLIST";
+        $result = $conn->query('SHOW PROCESSLIST');
+        $colcount = $result->columnCount();
+
+        echo "<pre style='display:inline;'>";
+        // Get coluumn headers
+        echo("<table style='border: solid 1px black;'><tr>");
+        echo ('<table><tr>');
+        for ($i = 0; $i < $colcount; $i++){
+                $meta = $result->getColumnMeta($i)["name"];
+                echo('<th>' . $meta . '</th>');
+        }
+        echo('</tr>');
+        // Get row data
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                echo('<tr>');
+                for ($i = 0; $i < $colcount; $i++){
+                        $meta = $result->getColumnMeta($i)["name"];
+                        echo("<td style='border: solid 1px black;'>" . $row[$meta] . '</td>');
+                }
+                echo('</tr>');
+        }
+
+        echo ('</table>');
+}
+catch(PDOException $e)
+        {
+        echo "Connection failed: " . $e->getMessage();
+        }
+echo "<br>";
+try {
+        $conn = new PDO("mysql:host=$servername1;dbname=$database", $username, $password);
+        $conn->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	echo "<br>";
+        echo "SHOW MASTER STATUS";
+        $result = $conn->query('SHOW MASTER STATUS');
+        $colcount = $result->columnCount();
+
+        echo "<pre style='display:inline;'>";
+        // Get coluumn headers
+        echo("<table style='border: solid 1px black;'><tr>");
+        echo ('<table><tr>');
+        for ($i = 0; $i < $colcount; $i++){
+                $meta = $result->getColumnMeta($i)["name"];
+                echo('<th>' . $meta . '</th>');
+        }
+        echo('</tr>');
+        // Get row data
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                echo('<tr>');
+                for ($i = 0; $i < $colcount; $i++){
+                        $meta = $result->getColumnMeta($i)["name"];
+                        echo("<td style='border: solid 1px black;'>" . $row[$meta] . '</td>');
+                }
+                echo('</tr>');
+        }
+
+        echo ('</table>');
+}
+catch(PDOException $e)
+        {
+        echo "Connection failed: " . $e->getMessage();
+        }
+echo "<br>";
+try {
+        $conn = new PDO("mysql:host=$servername1;dbname=$database", $username, $password);
+        $conn->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	echo "<br>";
+	echo "SELECT @@read_only";
+        $result = $conn->query('SELECT @@read_only');
+        $colcount = $result->columnCount();
+
+        echo "<pre style='display:inline;'>";
+        // Get coluumn headers
+        echo("<table style='border: solid 1px black;'><tr>");
+        echo ('<table><tr>');
+        for ($i = 0; $i < $colcount; $i++){
+                $meta = $result->getColumnMeta($i)["name"];
+                echo('<th>' . $meta . '</th>');
+        }
+        echo('</tr>');
+        // Get row data
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                echo('<tr>');
+                for ($i = 0; $i < $colcount; $i++){
+                        $meta = $result->getColumnMeta($i)["name"];
+                        echo("<td style='border: solid 1px black;'>" . $row[$meta] . '</td>');
+                }
+                echo('</tr>');
+        }
+        echo ('</table>');
+}
+catch(PDOException $e)
+        {
+        echo "Connection failed: " . $e->getMessage();
+        }
+echo "<br>";
+try {
+        $conn = new PDO("mysql:host=$servername2;dbname=$database", $username, $password);
+        $conn->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "Connected successfully to 192.168.0.101";
+        echo "<br>";
+        echo "SHOW SLAVE STATUS";
+        $result = $conn->query('SHOW SLAVE STATUS');
+        $colcount = $result->columnCount();
+
+        echo "<pre style='display:inline;'>";
+        // Get coluumn headers
+        echo("<table style='border: solid 1px black;'><tr>");
+        echo ('<table><tr>');
+        for ($i = 0; $i < $colcount; $i++){
+                $meta = $result->getColumnMeta($i)["name"];
+                echo('<th>' . $meta . '</th>');
+        }
+        echo('</tr>');
+
+        // Get row data
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                echo('<tr>');
+                for ($i = 0; $i < $colcount; $i++){
+                        $meta = $result->getColumnMeta($i)["name"];
+                        echo("<td style='border: solid 1px black;'>" . $row[$meta] . '</td>');
+                }
+                echo('</tr>');
+        }
+
+        echo ('</table>');
+}
+catch(PDOException $e)
+        {
+        echo "Connection failed: " . $e->getMessage();
+        }
+echo "<br>";
+try {
+        $conn = new PDO("mysql:host=$servername2;dbname=$database", $username, $password);
+        $conn->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "<br>";
+        echo "SHOW PROCESSLIST";
+        $result = $conn->query('SHOW PROCESSLIST');
+        $colcount = $result->columnCount();
+
+        echo "<pre style='display:inline;'>";
+        // Get coluumn headers
+        echo("<table style='border: solid 1px black;'><tr>");
+        echo ('<table><tr>');
+        for ($i = 0; $i < $colcount; $i++){
+                $meta = $result->getColumnMeta($i)["name"];
+                echo('<th>' . $meta . '</th>');
+        }
+        echo('</tr>');
+
+        // Get row data
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                echo('<tr>');
+                for ($i = 0; $i < $colcount; $i++){
+                        $meta = $result->getColumnMeta($i)["name"];
+                        echo("<td style='border: solid 1px black;'>" . $row[$meta] . '</td>');
+                }
+                echo('</tr>');
+        }
+
+        echo ('</table>');
+}
+catch(PDOException $e)
+        {
+        echo "Connection failed: " . $e->getMessage();
+        }
+echo "<br>";
+try {
+        $conn = new PDO("mysql:host=$servername2;dbname=$database", $username, $password);
+        $conn->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "<br>";
+        echo "SHOW MASTER STATUS";
+        $result = $conn->query('SHOW MASTER STATUS');
+        $colcount = $result->columnCount();
+
+        echo "<pre style='display:inline;'>";
+        // Get coluumn headers
+        echo("<table style='border: solid 1px black;'><tr>");
+        echo ('<table><tr>');
+        for ($i = 0; $i < $colcount; $i++){
+                $meta = $result->getColumnMeta($i)["name"];
+                echo('<th>' . $meta . '</th>');
+        }
+        echo('</tr>');
+
+        // Get row data
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                echo('<tr>');
+                for ($i = 0; $i < $colcount; $i++){
+                        $meta = $result->getColumnMeta($i)["name"];
+                        echo("<td style='border: solid 1px black;'>" . $row[$meta] . '</td>');
+                }
+                echo('</tr>');
+        }
+
+        echo ('</table>');
+}
+catch(PDOException $e)
+        {
+        echo "Connection failed: " . $e->getMessage();
+        }
+echo "<br>";
+try {
+        $conn = new PDO("mysql:host=$servername2;dbname=$database", $username, $password);
+        $conn->SetAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "<br>";
+        echo "SELECT @@read_only";
+        $result = $conn->query('SELECT @@read_only');
+        $colcount = $result->columnCount();
+
+        echo "<pre style='display:inline;'>";
+        // Get coluumn headers
+        echo("<table style='border: solid 1px black;'><tr>");
+        echo ('<table><tr>');
+        for ($i = 0; $i < $colcount; $i++){
+                $meta = $result->getColumnMeta($i)["name"];
+                echo('<th>' . $meta . '</th>');
+        }
+        echo('</tr>');
+
+        // Get row data
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                echo('<tr>');
+                for ($i = 0; $i < $colcount; $i++){
+                        $meta = $result->getColumnMeta($i)["name"];
+                        echo("<td style='border: solid 1px black;'>" . $row[$meta] . '</td>');
+                }
+                echo('</tr>');
+        }
+
+        echo ('</table>');
+}
+catch(PDOException $e)
+        {
+        echo "Connection failed: " . $e->getMessage();
+        }
+echo "<br>";
+echo <<<HTML
+</body>
+</html>
+HTML;
+
+?>
